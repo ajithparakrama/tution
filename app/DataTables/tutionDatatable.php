@@ -25,6 +25,9 @@ class tutionDatatable extends DataTable
             ->addIndexColumn()
             ->addColumn('action', function($item){
                 $btn =  '<a href="'.route('tution.edit',$item->id).'" class="btn btn-xs btn-info" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil-alt"></i></a> ';
+                $btn .=  '<a href="'.route('tution.edit',$item->id).'" class="btn btn-xs btn-success" title="Students" data-toggle="tooltip"><i class="fa fa-users"></i></a> ';
+                $btn .=  '<a href="'.route('ctimes.index',$item->id).'" class="btn btn-xs btn-warning" title="Class dates" data-toggle="tooltip"><i class="fa fa-calendar-alt"></i></a> ';
+              
                 if($item->active==1){ 
                 $btn .=  '<a href="'.route('tution.deactive',$item->id).'" class="btn btn-xs btn-danger" title="Inactive" data-toggle="tooltip"><i class="fa fa-trash"></i></a>';
                 }else{
@@ -80,7 +83,7 @@ class tutionDatatable extends DataTable
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
-            ->width(60)
+            ->width(100)
             ->addClass('text-center'), 
             Column::make('name'),
             Column::make('subject.name')->title('Subject'),
