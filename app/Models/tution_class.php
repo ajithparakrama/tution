@@ -49,4 +49,14 @@ class tution_class extends Model
         return $this->belongsTo(subject::class, 'subjects_id');
     }
 
+    /**
+     * Get all of the ctimes for the tution_class
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function ctimes()
+    {
+        return $this->hasMany(ctimes::class, 'tution_classes_id', 'id');
+    }
+
 }

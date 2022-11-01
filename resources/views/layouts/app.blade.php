@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.css') }}">
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('plugin/toastr/toastr.css') }}">
     @yield('third_party_stylesheets')
 
     @stack('page_css')
@@ -83,8 +83,8 @@
 
 </body>
 <script src="{{ mix('js/app.js') }}" defer></script>
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}" ></script>
-<script src="{{ asset('js/toastr/toastr.min.js') }}" defer></script>
+<script src="{{ asset('plugin/jquery/jquery.min.js') }}" ></script>
+<script src="{{ asset('plugin/toastr/toastr.min.js') }}" defer></script>
 
 @yield('third_party_scripts')
 

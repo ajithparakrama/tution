@@ -13,7 +13,8 @@ class ctimes extends Model
         'date',
 'start_at',
 'end_at',
-'remarks'
+'remarks',
+'tution_classes_id'
     ];
 
 }

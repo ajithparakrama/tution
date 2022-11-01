@@ -19,7 +19,8 @@ class CreateCtimesTable extends Migration
             $table->date('date');
             $table->time('start_at');
             $table->time('end_at');
-            $table->string('remarks', 250);
+            $table->string('remarks', 250)->nullable();
+            $table->bigInteger('tution_classes_id')->unsigne();
         });
     }
 

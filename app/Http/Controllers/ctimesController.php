@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ctimes;
+use App\Models\tution_class;
 use Illuminate\Http\Request;
 
 class ctimesController extends Controller
@@ -11,9 +13,9 @@ class ctimesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(tution_class $tution)
     {
-        //
+        return view('tutionClasses.ctimes.index',compact('tution'));
     }
 
     /**
@@ -21,9 +23,9 @@ class ctimesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(tution_class $tution)
     {
-        //
+        return view('tutionClasses.ctimes.create',compact('tution'));
     }
 
     /**
@@ -32,9 +34,21 @@ class ctimesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(tution_class $tution, Request $request)
     {
-        //
+        $request->validate([
+            'date'=>'required|min:2|max:255',  
+            'start_at'=>'required|after:now',
+            'end_at'=>'required|after:start_at'
+        ]);
+
+        $tution->ctimes()->create([
+            'date'=>$request->date,
+            'start_at'=>$request->start_at,
+            'end_at'=>$request->end_at,
+            'remarks'=>$request->remarks,
+        ]);
+        return redirect()->route('ctimes.index',$tution->id)->with('message','success');
     }
 
     /**
@@ -54,9 +68,9 @@ class ctimesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(tution_class $tution,ctimes $ctime)
     {
-        //
+        return view('tutionClasses.ctimes.edit',compact('tution','ctime'));
     }
 
     /**
@@ -66,9 +80,21 @@ class ctimesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, tution_class $tution,ctimes $ctime)
     {
-        //
+        $request->validate([
+            'date'=>'required|min:2|max:255',  
+            'start_at'=>'required|after:now',
+            'end_at'=>'required|after:start_at'
+        ]);
+
+        $ctime->update([
+            'date'=>$request->date,
+            'start_at'=>$request->start_at,
+            'end_at'=>$request->end_at,
+            'remarks'=>$request->remarks,
+        ]);
+        return redirect()->route('ctimes.index',$tution->id)->with('message','success');
     }
 
     /**
