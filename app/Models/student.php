@@ -25,5 +25,14 @@ class student extends Model
         'gender'
     ];
 
+    /**
+     * The roles that belong to the TutionClass
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function TutionClass()
+    {
+        return $this->belongsToMany(TutionClass::class, 'student_tution_class', 'student_id', 'tution_class_id');
+    }
 
 }

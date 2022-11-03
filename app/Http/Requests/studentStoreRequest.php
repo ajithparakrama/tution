@@ -34,7 +34,8 @@ class studentStoreRequest extends FormRequest
             'address'=>'required|min:2',
             'parent_name'=>'required',
             'parent_contact'=>'',
-            'parent_contact1'=>''
+            'parent_contact1'=>'',
+            'tution_classes_id'=>'array'
         ];
     }
 }

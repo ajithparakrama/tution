@@ -11,6 +11,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\subjectsController;
 use App\Http\Controllers\User\usercontroller;
 use App\Http\Controllers\institutesController;
+use App\Http\Controllers\ClassStudentController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
@@ -54,6 +55,11 @@ Route::group(['middleware' => ['verified']], function() {
 
     Route::prefix('tution/{tution}')->group(function(){
         Route::resource('ctimes',ctimesController::class);
+   //     Route::get('tstudents/add-to-class',ClassStudentController::class,'addToClass')->name('add-t-class'); // show form
+   //     Route::POST('tstudents/save-to-class',ClassStudentController::class,'saveToClass')->name('save-t-class'); //store child to class
+
+
+        Route::resource('tstudents',ClassStudentController::class);
     });
     
     Route::get('/home/profile',[HomeController::class,'profile'])->name('profile');

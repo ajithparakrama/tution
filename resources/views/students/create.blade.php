@@ -171,7 +171,22 @@
               </div>
             </div>
 
-
+            <div class="form-group row">
+              <label for="subject" class="col-sm-2">Classes</label>
+              <div class="col-sm-7">
+              <select name="tution_classes_id[]" id="" class=" select2 form-control text-black" multiple="multiple">
+                @foreach ($tutionClass as $item)
+                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                @endforeach
+              </select>
+              
+                @error('parent_name')
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+              @enderror
+            </div>
+            </div>
 
 
 
@@ -185,7 +200,16 @@
 </div>
 @endsection
 
+@section('third_party_stylesheets') 
+<link rel="stylesheet" href="{{ asset('plugin/select2/css/select2.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugin/select2-bootstrap4-theme/select2-bootstrap4.css') }}">
+@stop
 @section('third_party_scripts')
-
-@endsection
+<script src="{{ asset('plugin/select2/js/select2.js') }}" defer></script>
+  <script>
+    $(document).ready(function() {
+    $('.select2').select2();
+});
+  </script>
+@stop
 

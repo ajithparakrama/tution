@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tution_class extends Model
+class TutionClass extends Model
 {
     use HasFactory;
 
@@ -59,4 +59,13 @@ class tution_class extends Model
         return $this->hasMany(ctimes::class, 'tution_classes_id', 'id');
     }
 
+    /**
+     * The roles that belong to the TutionClass
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function student()
+    {
+        return $this->belongsToMany(student::class, 'student_tution_class', 'tution_class_id', 'student_id');
+    }
 }

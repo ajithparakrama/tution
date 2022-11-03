@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\student;
 use App\Models\TutionClass;
 use Illuminate\Http\Request;
-use App\Http\Requests\studentStoreRequest;
-use App\DataTables\teacherStudentsDatatable;
+use App\DataTables\classStudentsDatatable;
 
-class StudentController extends Controller
+class ClassStudentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(teacherStudentsDatatable $dataTable)
-    {
-        return    $dataTable->render('students.index'); 
+    public function index(classStudentsDatatable $dataTable,TutionClass $tution)
+    { 
+         return $dataTable->with('tution',$tution)->render('tutionClasses.students.index',compact('tution'));
     }
 
     /**
@@ -27,8 +25,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $tutionClass =   TutionClass::where('active','1')->get();
-        return view('students.create',compact('tutionClass'));
+        return redirect()->route('students.create');
+      //  return view('students.create');
     }
 
     /**
@@ -37,12 +35,9 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(studentStoreRequest $request)
+    public function store(Request $request)
     {
-        $student =    student::create($request->all());
-
-        $student->TutionClass()->sync($request->tution_classes_id);
-        return redirect()->route('students.index')->with('message','Student Created');
+        //
     }
 
     /**
@@ -51,9 +46,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(student $student)
+    public function show($id)
     {
-        return view('students.show',compact('student'));
+        //
     }
 
     /**
@@ -62,9 +57,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(student $student)
+    public function edit($id)
     {
-        return view('students.edit',compact('student'));
+        //
     }
 
     /**
@@ -74,10 +69,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(studentStoreRequest $request, student $student)
+    public function update(Request $request, $id)
     {
-        $student->update($request->all());
-        return redirect()->route('students.index')->with('message','Student Details updated');
+        //
     }
 
     /**
@@ -90,4 +84,7 @@ class StudentController extends Controller
     {
         //
     }
+
+    
+    
 }

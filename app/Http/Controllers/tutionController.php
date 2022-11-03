@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\subject;
 use App\Models\institute;
-use App\Models\tution_class;
+use App\Models\TutionClass;
 use Illuminate\Http\Request;
 use App\DataTables\tutionDatatable;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +49,7 @@ class tutionController extends Controller
            'institutes_id'=>'required'
         ]);
 
-         tution_class::create(
+         TutionClass::create(
             ['name'=>$request->name,
             'location'=>$request->location,
             'type'=>$request->type,
@@ -68,7 +68,7 @@ class tutionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(tution_class $tution)
+    public function show(TutionClass $tution)
     {
         
     }
@@ -79,7 +79,7 @@ class tutionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(tution_class $tution)
+    public function edit(TutionClass $tution)
     {
         if($tution->teacher_id==Auth::user()->id){ 
         $subject =  subject::all();
@@ -96,7 +96,7 @@ class tutionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, tution_class $tution)
+    public function update(Request $request, TutionClass $tution)
     {
         if($tution->teacher_id==Auth::user()->id){ 
         $tution->update(
@@ -123,14 +123,14 @@ class tutionController extends Controller
         //
     }
 
-    public function active(tution_class $tution){
+    public function active(TutionClass $tution){
         $tution->update(
             ['active'=>1]
         );
         return redirect()->route('tution.index')->with('error','Activated class');
     }
 
-    public function deactive(tution_class $tution){
+    public function deactive(TutionClass $tution){
         $tution->update(
             ['active'=>0]
         );

@@ -1,8 +1,8 @@
 <?php
 
 namespace App\DataTables;
-
-use App\Models\tution_class;
+ 
+use App\Models\TutionClass;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +25,7 @@ class tutionDatatable extends DataTable
             ->addIndexColumn()
             ->addColumn('action', function($item){
                 $btn =  '<a href="'.route('tution.edit',$item->id).'" class="btn btn-xs btn-info" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil-alt"></i></a> ';
-                $btn .=  '<a href="'.route('tution.edit',$item->id).'" class="btn btn-xs btn-success" title="Students" data-toggle="tooltip"><i class="fa fa-users"></i></a> ';
+                $btn .=  '<a href="'.route('tstudents.index',$item->id).'" class="btn btn-xs btn-success" title="Students" data-toggle="tooltip"><i class="fa fa-users"></i></a> ';
                 $btn .=  '<a href="'.route('ctimes.index',$item->id).'" class="btn btn-xs btn-warning" title="Class dates" data-toggle="tooltip"><i class="fa fa-calendar-alt"></i></a> ';
               
                 if($item->active==1){ 
@@ -40,10 +40,10 @@ class tutionDatatable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \tution_class $model
+     * @param \TutionClass $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(tution_class $model)
+    public function query(TutionClass $model)
     {
       //  return $model->newQuery()->with('subject')->with('institute');
       return Auth::user()->tution()->with('subject')->with('institute');
