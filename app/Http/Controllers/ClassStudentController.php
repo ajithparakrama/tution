@@ -85,6 +85,20 @@ class ClassStudentController extends Controller
         //
     }
 
-    
+    public function addToClass(TutionClass $tution){
+        return view('tutionClasses.students.add-to-class',compact('tution'));
+    }
+
+    public function saveToClass(Request $request, TutionClass $tution){
+        $request->validate([
+            'student_id'=>'required|numeric:true'
+        ]);
+        if($tution->student()->where('id',$request->student_id)->exists()){
+            return redirect()->route('tstudent.add-to-class',$tution->id)->with('danger','Student alrady in the class');
+        }
+
+        $tution->student()->attach(['student_id'=>$request->student_id]);
+        return redirect()->route('tstudents.index',$tution->id)->with('message','Student Added to class');
+    }
     
 }

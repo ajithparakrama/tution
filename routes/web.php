@@ -55,8 +55,8 @@ Route::group(['middleware' => ['verified']], function() {
 
     Route::prefix('tution/{tution}')->group(function(){
         Route::resource('ctimes',ctimesController::class);
-   //     Route::get('tstudents/add-to-class',ClassStudentController::class,'addToClass')->name('add-t-class'); // show form
-   //     Route::POST('tstudents/save-to-class',ClassStudentController::class,'saveToClass')->name('save-t-class'); //store child to class
+        Route::get('tstudents/add-to-class',[ClassStudentController::class,'addToClass'])->name('tstudent.add-to-class'); // show form
+        Route::POST('tstudents/save-to-class',[ClassStudentController::class,'saveToClass'])->name('tstudent.save-to-class'); //store child to class
 
 
         Route::resource('tstudents',ClassStudentController::class);

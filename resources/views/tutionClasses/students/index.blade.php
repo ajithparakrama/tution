@@ -23,7 +23,7 @@
         <div class="card-header">
             <h2 class="card-title">{{ $tution->name }} Students List at {{ $tution->institute->name }}</h2>
             <div class="card-tools">
-              <a href="" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add Student</a>
+              <a href="{{ route('tstudent.add-to-class',$tution->id) }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add Student</a>
               <a href="" class="btn btn-sm btn-info"><i class="fa fa-plus"></i> Register New Student</a>
             </div>
         </div>
