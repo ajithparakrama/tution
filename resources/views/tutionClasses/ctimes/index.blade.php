@@ -25,6 +25,7 @@
 
             <div class="card-tools">
               <a href="{{ route('ctimes.create',[$tution->id]) }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New Date and Time</a>
+              <a href="{{ url()->previous() }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
             </div>
         </div>
         
@@ -32,18 +33,21 @@
             <table class="table table-hover">
               <tr>
                 <th>No</th>
+                <th>Payment Month</th>
                 <th>Date</th>
                 <th>Duration</th>
                 <th>Remarks</th>
                 <th>Attendence</th>
                 <th>Action</th>
               </tr> 
-              @foreach($tution->ctimes as $item)
+              @foreach($tution->ctimes->sortBy('date') as $item)
               <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $item->date }}</td>
-                <td>{{ $item->remarks }}</td>
+                <td>{{ date("Y-M",strtotime($item->date)) }}</td>
+                <td>{{ date("Y-m-d - D",strtotime($item->date)) }}</td>
                 <td>{{ $item->start_at }} to {{ $item->end_at }}</td> 
+                <td>{{ $item->remarks }}</td>
+                
                 <td></td>
                 <td>
                   <a href="{{ route('ctimes.edit',[$tution->id,$item->id]) }}" class="btn btn-xs btn-info" title="Edit Date and Time" data-toggle="tolltip"><i class="fa fa-pencil-alt"></i></a>

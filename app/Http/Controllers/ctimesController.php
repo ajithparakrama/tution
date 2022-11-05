@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ctimes;
-use App\Models\tution_class;
+use App\Models\TutionClass;
 use Illuminate\Http\Request;
 
 class ctimesController extends Controller
@@ -13,7 +13,7 @@ class ctimesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(tution_class $tution)
+    public function index(TutionClass $tution)
     {
         return view('tutionClasses.ctimes.index',compact('tution'));
     }
@@ -23,7 +23,7 @@ class ctimesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(tution_class $tution)
+    public function create(TutionClass $tution)
     {
         return view('tutionClasses.ctimes.create',compact('tution'));
     }
@@ -34,11 +34,11 @@ class ctimesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(tution_class $tution, Request $request)
+    public function store(TutionClass $tution, Request $request)
     {
         $request->validate([
             'date'=>'required|min:2|max:255',  
-            'start_at'=>'required|after:now',
+            'start_at'=>'required',
             'end_at'=>'required|after:start_at'
         ]);
 
@@ -68,7 +68,7 @@ class ctimesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(tution_class $tution,ctimes $ctime)
+    public function edit(TutionClass $tution,ctimes $ctime)
     {
         return view('tutionClasses.ctimes.edit',compact('tution','ctime'));
     }
@@ -80,11 +80,11 @@ class ctimesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, tution_class $tution,ctimes $ctime)
+    public function update(Request $request, TutionClass $tution,ctimes $ctime)
     {
         $request->validate([
             'date'=>'required|min:2|max:255',  
-            'start_at'=>'required|after:now',
+            'start_at'=>'required',
             'end_at'=>'required|after:start_at'
         ]);
 

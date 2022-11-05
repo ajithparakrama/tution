@@ -1,6 +1,6 @@
 <!-- need to remove -->
 <li class="nav-item">
-    <a href="{{ route('home') }}" class="nav-link active">
+    <a href="{{ route('home') }}" class="nav-link ">
         <i class="nav-icon fas fa-home"></i>
         <p>Home</p>
     </a>
@@ -8,17 +8,17 @@
 
 <li class="nav-item   has-treeview  {{request()->routeIs('students*')?'menu-open':'' }}">
     <a href="#" class="nav-link"> 
-      <i class="nav-icon nav-icon fas fa-file-alt text-blue"></i>            
+      <i class="nav-icon nav-icon fas  fa-users text-green"></i>            
       <p> 
         Students
-        <i class="right fas fa-angle-left text-blue"></i>
+        <i class="right fas fa-angle-left text-green"></i>
       </p>
     </a>
   
     <ul class="nav nav-treeview">
       <li class="nav-item">
-        <a href="{{ route('students.index') }}" class="nav-link   {{request()->routeIs('students.index')?'active':'' }} ">
-          <i class="far fa-circle nav-icon text-blue"></i>
+        <a href="{{ route('students.index') }}" class="nav-link   {{request()->routeIs('students*')?'active':'' }} ">
+          <i class="far fa-circle nav-icon text-green"></i>
           <p>Students</p>
         </a>
       </li>  

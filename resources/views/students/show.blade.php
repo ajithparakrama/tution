@@ -20,14 +20,12 @@
       </section>
 
     
-    <div class="card">
+    <div class="card card-green">
         <div class="card-header">
             <h2 class="card-title"> <small>{{ $student->name }}</small></h2>
-        </div>
-        <form action="{{ route('students.update',$student->id) }}" method="post" enctype="multipart/form-data">
-        <div class="card-body"> 
-            @csrf
-            @method('PUT') 
+            <div class="card-tools"><a href="{{ url()->previous() }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a></div>
+        </div> 
+        <div class="card-body">  
               <div class="form-group row">
                 <label for="subject" class="col-sm-2">Name</label>
                 <div class="col-sm-7"> 
@@ -118,7 +116,7 @@
 
 
             <div class="form-group row">
-                <label for="subject" class="col-sm-2">parent contact</label>
+                <label for="subject" class="col-sm-2">Classes</label>
                 <div class="col-sm-10">
                     <ul>
                     @foreach ($student->TutionClass as $item)
@@ -133,8 +131,7 @@
         </div>
         <div class="card-footer">
             <input type="submit" value="Save" class="btn btn-sm btn-info">
-        </div>
-      </form>
+        </div> 
     </div>
 </div>
 @endsection

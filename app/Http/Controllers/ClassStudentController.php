@@ -94,7 +94,7 @@ class ClassStudentController extends Controller
             'student_id'=>'required|numeric:true'
         ]);
         if($tution->student()->where('id',$request->student_id)->exists()){
-            return redirect()->route('tstudent.add-to-class',$tution->id)->with('danger','Student alrady in the class');
+            return redirect()->route('tstudents.index',$tution->id)->with('info','Student alrady in the class');
         }
 
         $tution->student()->attach(['student_id'=>$request->student_id]);

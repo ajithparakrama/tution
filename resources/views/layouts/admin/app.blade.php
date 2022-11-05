@@ -95,7 +95,7 @@
 @if(session()->has('info'))
 <script> 
     $(document).ready(function(){ 
- toastr.success({{ session()->get('info') }})   
+ toastr.info('{{ session()->get('info') }}')   
 }); 
 </script> 
 @endif
@@ -103,7 +103,7 @@
 @if(session()->has('danger'))
 <script> 
     $(document).ready(function(){ 
- toastr.success('{{ session()->get('danger') }}')   
+ toastr.error('{{ session()->get('danger') }}')   
 }); 
 </script> 
 @endif

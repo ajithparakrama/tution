@@ -20,9 +20,10 @@
       </section>
 
     
-    <div class="card">
+    <div class="card card-green">
         <div class="card-header">
             <h2 class="card-title">Edit Student <small>{{ $student->name }}</small></h2>
+            <div class="card-tools"><a href="{{ url()->previous() }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a></div>
         </div>
         <form action="{{ route('students.update',$student->id) }}" method="post" enctype="multipart/form-data">
         <div class="card-body"> 

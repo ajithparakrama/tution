@@ -23,7 +23,7 @@
         <div class="card-header">
             <h2 class="card-title">{{ $tution->name }} Students List at {{ $tution->institute->name }}</h2>
             <div class="card-tools">
-              <a href="" class="btn btn-sm btn-success"><i class="fa fa-arrow"></i> Back</a> 
+              <a href="{{ url()->previous() }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
             </div>
         </div>
         <form action="{{ route('tstudent.save-to-class',$tution->id) }}" method="post">

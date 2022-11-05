@@ -24,6 +24,9 @@
       <div class="card">
         <div class="card-header">
             <h2 class="card-title">Edit Class</h2>
+            <div class="card-tools">
+            <a href="{{ url()->previous() }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
+          </div>
         </div>
         <form action="{{ route('tution.update',$tution->id) }}" method="post">
         <div class="card-body">           
