@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tution_classes', function (Blueprint $table) {
+        Schema::create('payment_months', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('tution_classes_id')->unsigne();
+            $table->string('name', 100);
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tution_classes');
+        Schema::dropIfExists('payment_months');
     }
 };

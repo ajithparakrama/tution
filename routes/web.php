@@ -12,6 +12,7 @@ use App\Http\Controllers\subjectsController;
 use App\Http\Controllers\User\usercontroller;
 use App\Http\Controllers\institutesController;
 use App\Http\Controllers\ClassStudentController;
+use App\Http\Controllers\paymentMonthController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
@@ -60,6 +61,7 @@ Route::group(['middleware' => ['verified']], function() {
 
 
         Route::resource('tstudents',ClassStudentController::class);
+        Route::resource('payemnt-months',paymentMonthController::class);
     });
     
     Route::get('/home/profile',[HomeController::class,'profile'])->name('profile');

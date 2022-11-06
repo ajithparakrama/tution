@@ -27,6 +27,7 @@ class tutionDatatable extends DataTable
                 $btn =  '<a href="'.route('tution.edit',$item->id).'" class="btn btn-xs btn-info" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil-alt"></i></a> ';
                 $btn .=  '<a href="'.route('tstudents.index',$item->id).'" class="btn btn-xs btn-success" title="Students" data-toggle="tooltip"><i class="fa fa-users"></i></a> ';
                 $btn .=  '<a href="'.route('ctimes.index',$item->id).'" class="btn btn-xs btn-warning" title="Class dates" data-toggle="tooltip"><i class="fa fa-calendar-alt"></i></a> ';
+                $btn .=  '<a href="'.route('payemnt-months.index',$item->id).'" class="btn btn-xs bg-olive" title="Class dates" data-toggle="tooltip"><i class="fa fa-dollar-sign"></i></a> ';
               
                 if($item->active==1){ 
                 $btn .=  '<a href="'.route('tution.deactive',$item->id).'" class="btn btn-xs btn-danger" title="Inactive" data-toggle="tooltip"><i class="fa fa-trash"></i></a>';

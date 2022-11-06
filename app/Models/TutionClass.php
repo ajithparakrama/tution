@@ -68,4 +68,14 @@ class TutionClass extends Model
     {
         return $this->belongsToMany(student::class, 'student_tution_class', 'tution_class_id', 'student_id');
     }
+
+    /**
+     * Get all of the paymentMonths for the TutionClass
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function paymentMonths()
+    {
+        return $this->hasMany(paymentMonth::class, 'tution_classes_id');
+    }
 }

@@ -48,6 +48,16 @@ class ctimesController extends Controller
             'end_at'=>$request->end_at,
             'remarks'=>$request->remarks,
         ]);
+
+        /**
+         * check payment month create or not if not create create it
+         */
+
+     //    dd($tution->paymentMonths->where('name','=',date('Y-M',strtotime($request->date)))); 
+        if($tution->paymentMonths()->where('name','=',date('Y-M',strtotime($request->date)))->get()->count()==0){
+            $tution->paymentMonths()->create(['name'=>date('Y-M',strtotime($request->date))]);
+        }
+
         return redirect()->route('ctimes.index',$tution->id)->with('message','success');
     }
 

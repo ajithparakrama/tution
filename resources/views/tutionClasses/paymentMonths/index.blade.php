@@ -40,13 +40,10 @@
                 <th>Attendence</th>
                 <th>Action</th>
               </tr> 
-              @foreach($tution->ctimes->sortBy('date') as $item)
+              @foreach($tution->paymentMonths->sortBy('name') as $item)
               <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ date("Y-M",strtotime($item->date)) }}</td>
-                <td>{{ date("Y-m-d - D",strtotime($item->date)) }}</td>
-                <td>{{ $item->start_at }} to {{ $item->end_at }}</td> 
-                <td>{{ $item->remarks }}</td>
+                             <td>{{ $item->name }}</td>
                 
                 <td></td>
                 <td>

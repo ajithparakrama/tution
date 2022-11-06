@@ -35,4 +35,14 @@ class student extends Model
         return $this->belongsToMany(TutionClass::class, 'student_tution_class', 'student_id', 'tution_class_id');
     }
 
+        /**
+     * The roles that belong to the paymentMonth
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function paymentMonth()
+    {
+        return $this->belongsToMany(paymentMonth::class, 'payment_month_student', 'student_id', 'payment_month_id')->withPivot('amount');
+    }
+
 }
