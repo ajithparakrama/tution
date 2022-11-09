@@ -24,7 +24,7 @@
             <h2 class="card-title">{{ $tution->name }} at {{ $tution->institute->name }}</h2>
 
             <div class="card-tools">
-              <a href="{{ route('ctimes.create',[$tution->id]) }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New Date and Time</a>
+             
               <a href="{{  route('tution.index') }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
             </div>
         </div>
@@ -33,21 +33,15 @@
             <table class="table table-hover">
               <tr>
                 <th>No</th>
-                <th>Payment Month</th>
-                <th>Date</th>
-                <th>Duration</th>
-                <th>Remarks</th>
-                <th>Attendence</th>
-                <th>Action</th>
+                <th>Payment Month</th> 
+                <th  >Payments</th>
               </tr> 
-              @foreach($tution->paymentMonths->sortBy('name') as $item)
+              @foreach($tution->paymentMonths->sortBy('id') as $item)
               <tr>
                 <td>{{ $loop->iteration }}</td>
-                             <td>{{ $item->name }}</td>
-                
-                <td></td>
+                             <td>{{ $item->name }}</td> 
                 <td>
-                  <a href="{{ route('ctimes.edit',[$tution->id,$item->id]) }}" class="btn btn-xs btn-info" title="Edit Date and Time" data-toggle="tolltip"><i class="fa fa-pencil-alt"></i></a>
+                  <a href="{{ route('payemnt-months.add-payment',[$tution->id,$item->id]) }}" class="btn btn-xs btn-info" title="Payments" data-toggle="tolltip"><i class="fa fa-credit-card"></i></a>
                 </td>
               </tr>
               @endforeach

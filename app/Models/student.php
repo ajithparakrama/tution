@@ -45,4 +45,14 @@ class student extends Model
         return $this->belongsToMany(paymentMonth::class, 'payment_month_student', 'student_id', 'payment_month_id')->withPivot('amount');
     }
 
+        /**
+     * The students that belong to the ctimes
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function ctimes()
+    {
+        return $this->belongsToMany(ctimes::class, 'ctime_student', 'student_id', 'ctime_id')->withPivot('craete_by','ip','update_by','up_ip');
+    }
+
 }

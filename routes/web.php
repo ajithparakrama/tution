@@ -55,13 +55,21 @@ Route::group(['middleware' => ['verified']], function() {
     Route::resource('tution',tutionController::class);
 
     Route::prefix('tution/{tution}')->group(function(){
+
+        Route::get('ctimes/{ctime}/attendance',[ctimesController::class,'attendance'])->name('ctimes.attendance');
+        Route::post('ctimes/{ctime}/markattendance',[ctimesController::class,'markattendance'])->name('ctimes.markattendance');
         Route::resource('ctimes',ctimesController::class);
+    
         Route::get('tstudents/add-to-class',[ClassStudentController::class,'addToClass'])->name('tstudent.add-to-class'); // show form
         Route::POST('tstudents/save-to-class',[ClassStudentController::class,'saveToClass'])->name('tstudent.save-to-class'); //store child to class
 
 
         Route::resource('tstudents',ClassStudentController::class);
-        Route::resource('payemnt-months',paymentMonthController::class);
+        Route::get('payemnt-months',[paymentMonthController::class,'index'])->name('payemnt-months.index');
+        Route::get('payemnt-months/{payment_month}/addpayment',[paymentMonthController::class,'addpayment'])->name('payemnt-months.add-payment');
+        Route::post('payemnt-months/{payment_month}/addpayment',[paymentMonthController::class,'store'])->name('payemnt-months.store');
+   //     Route::resource('payemnt-months',paymentMonthController::class);
+
     });
     
     Route::get('/home/profile',[HomeController::class,'profile'])->name('profile');

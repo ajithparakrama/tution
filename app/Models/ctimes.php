@@ -17,4 +17,15 @@ class ctimes extends Model
 'tution_classes_id'
     ];
 
+
+    /**
+     * The students that belong to the ctimes
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function students()
+    {
+        return $this->belongsToMany(student::class, 'ctime_student', 'ctime_id', 'student_id')->withPivot('craete_by','ip','update_by','up_ip')->withTimestamps();
+    }
+
 }

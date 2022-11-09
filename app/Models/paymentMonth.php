@@ -30,7 +30,9 @@ class paymentMonth extends Model
      */
     public function student()
     {
-        return $this->belongsToMany(student::class, 'payment_month_student', 'payment_month_id', 'student_id')->withPivot('amount');
+        return $this->belongsToMany(student::class, 'paymentmonth_student', 'payment_months_id', 'students_id')->withPivot('amount','created_by')->withTimestamps();
     }
+
+
  
 }

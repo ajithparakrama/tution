@@ -26,7 +26,7 @@
     </ul>
 </li>
 
-<li class="nav-item   has-treeview  {{request()->routeIs('tution*')?'menu-open':'' }}">
+<li class="nav-item   has-treeview  {{request()->routeIs('tution*')?'menu-open':'' }}  {{request()->routeIs('tstudents*')?'menu-open':'' }}  {{request()->routeIs('tution*')?'menu-open':'' }}">
     <a href="#" class="nav-link"> 
       <i class="nav-icon nav-icon fas fa-file-alt text-blue"></i>            
       <p> 

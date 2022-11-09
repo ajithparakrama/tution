@@ -51,6 +51,7 @@
                 <td></td>
                 <td>
                   <a href="{{ route('ctimes.edit',[$tution->id,$item->id]) }}" class="btn btn-xs btn-info" title="Edit Date and Time" data-toggle="tolltip"><i class="fa fa-pencil-alt"></i></a>
+                  <a href="{{ route('ctimes.attendance',[$tution->id,$item->id]) }}" class="btn btn-xs btn-success"><i class="fa fa-sign-in"></i></a>
                 </td>
               </tr>
               @endforeach

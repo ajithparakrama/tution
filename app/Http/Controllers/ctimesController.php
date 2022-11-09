@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\ctimes;
+use App\Models\student;
 use App\Models\TutionClass;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\DataTables\studentAttendanceDatatable;
 
 class ctimesController extends Controller
 {
@@ -116,5 +119,28 @@ class ctimesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function attendance(studentAttendanceDatatable $dataTable,TutionClass $tution,ctimes $ctime){
+
+    //    return view('tutionClasses.ctimes.attendance',compact('tution','ctime'));
+    return $dataTable->with(['ctime'=>$ctime])->render('tutionClasses.ctimes.attendance',compact('tution','ctime'));
+
+    }
+
+    public function markattendance(Request $request, TutionClass $tution,ctimes $ctime){
+        $request->validate([
+            'student_id'=>'required'
+        ]);
+
+     $res=    $ctime->students()->attach($request->student_id,[
+            'created_by'=>Auth::user()->id,
+            'active'=>1,
+            'ip'=>$request->ip()
+        ]);
+    //    dd($res);
+        $student = student::find($request->student_id);
+
+        return redirect()->route('ctimes.attendance',[$tution->id,$ctime->id])->with('message','Attendance added.'.$student->name);
     }
 }
