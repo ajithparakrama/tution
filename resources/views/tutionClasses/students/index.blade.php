@@ -21,11 +21,8 @@
     
     <div class="card">
         <div class="card-header">
-            <h2 class="card-title">{{ $tution->name }} Students List at {{ $tution->institute->name }}</h2>
-            <div class="card-tools">
-
-             
-
+            <h2 class="card-title">{{ $tution->name }} Students List at {{ ($tution->hall->name)??'' }}</h2>
+            <div class="card-tools"> 
               <form action="{{ route('tstudent.save-to-class',$tution->id) }}" method="post" class="d-inline">
               <div class="input-group input-group-sm">
               

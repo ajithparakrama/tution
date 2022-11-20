@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\hall;
+use App\Models\User;
 use App\Models\subject;
 use App\Models\institute;
 use App\Models\TutionClass;
@@ -11,6 +13,22 @@ use Illuminate\Support\Facades\Auth;
 
 class tutionController extends Controller
 {
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    function __construct()
+    {
+         $this->middleware('permission:classes-list|classes-create|classes-edit|classes-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:classes-create', ['only' => ['create','store']]);
+         $this->middleware('permission:classes-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:classes-delete', ['only' => ['destroy']]);
+    } 
+
+
     /**
      * Display a listing of the resource.
      *
@@ -29,8 +47,8 @@ class tutionController extends Controller
     public function create()
     {
         $subject =  subject::all();
-        $institute = institute::all();
-        return view('tutionClasses.create',compact('subject','institute'));
+        $hall = hall::all();
+        return view('tutionClasses.create',compact('subject','hall'));
     }
 
     /**
@@ -43,18 +61,18 @@ class tutionController extends Controller
     {  
         $request->validate([
             'name'=>'required|min:2|max:250',
-            'location'=>'required|min:2|max:250',
+      //      'location'=>'required|min:2|max:250',
             'subjects_id'=>'required',
             'type'=>'required',
-           'institutes_id'=>'required'
+           'hall_id'=>'required'
         ]);
 
          TutionClass::create(
             ['name'=>$request->name,
-            'location'=>$request->location,
+        //    'location'=>$request->location,
             'type'=>$request->type,
             'subjects_id'=>$request->subjects_id,
-            'institutes_id'=>$request->institutes_id,
+            'hall_id'=>$request->hall_id,
             'teacher_id'=>Auth::user()->id]
         );
 
@@ -82,9 +100,9 @@ class tutionController extends Controller
     public function edit(TutionClass $tution)
     {
         if($tution->teacher_id==Auth::user()->id){ 
-        $subject =  subject::all();
-        $institute = institute::all();
-        return view('tutionClasses.edit',compact('subject','institute','tution'));
+        $subject =  subject::all(); 
+        $hall = hall::all();
+        return view('tutionClasses.edit',compact('subject','tution','hall'));
         }
        // abort(403);
     }
@@ -101,10 +119,11 @@ class tutionController extends Controller
         if($tution->teacher_id==Auth::user()->id){ 
         $tution->update(
             ['name'=>$request->name,
-            'location'=>$request->location,
+   //      'location'=>$request->location,
             'type'=>$request->type,
             'subjects_id'=>$request->subjects_id,
-            'institutes_id'=>$request->institutes_id]
+            'hall_id'=>$request->hall_id
+            ]
         );
         return redirect()->route('tution.index')->with('message','Class updated');
         }
@@ -136,4 +155,18 @@ class tutionController extends Controller
         );
         return redirect()->route('tution.index')->with('error','Deactivated class');
     }
+
+    public function staff(TutionClass $tution){
+        $users = User::where('type','=',2)->get();
+        return view('tutionClasses.staff.index',compact('tution','users'));
+    }
+
+
+    public function storeStaff(Request $request, TutionClass $tution){
+
+        $tution->staff()->sync($request->user_id);
+        return redirect()->route('tution.index')->with('message','Staff added to class');
+    }
+
+
 }

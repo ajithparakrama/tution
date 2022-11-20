@@ -5,28 +5,19 @@
         <p>Home</p>
     </a>
 </li>
-
-<li class="nav-item   has-treeview  {{request()->routeIs('students*')?'menu-open':'' }}">
-    <a href="#" class="nav-link"> 
-      <i class="nav-icon nav-icon fas  fa-users text-green"></i>            
-      <p> 
-        Students
-        <i class="right fas fa-angle-left text-green"></i>
-      </p>
-    </a>
-  
-    <ul class="nav nav-treeview">
+ 
+    @can('student-list')
       <li class="nav-item">
         <a href="{{ route('students.index') }}" class="nav-link   {{request()->routeIs('students*')?'active':'' }} ">
-          <i class="far fa-circle nav-icon text-green"></i>
+          <i class="nav-icon nav-icon fas  fa-users text-green"></i>  
           <p>Students</p>
         </a>
       </li>  
+    @endcan
+ 
 
-    </ul>
-</li>
-
-<li class="nav-item   has-treeview  {{request()->routeIs('tution*')?'menu-open':'' }}  {{request()->routeIs('tstudents*')?'menu-open':'' }}  {{request()->routeIs('tution*')?'menu-open':'' }}">
+@can('classes-list')
+  <li class="nav-item   has-treeview  {{request()->routeIs('tution*','tstudents*','tution*')?'menu-open':'' }}   ">
     <a href="#" class="nav-link"> 
       <i class="nav-icon nav-icon fas fa-file-alt text-blue"></i>            
       <p> 
@@ -51,4 +42,57 @@
 
     </ul>
 </li>
- 
+@endcan
+
+<li class="nav-item   has-treeview  {{request()->routeIs('subjects*','hall*','roles*','users*')?'menu-open':'' }}   ">
+  <a href="#" class="nav-link"> 
+    <i class="nav-icon nav-icon fas fa-cog text-red"></i>            
+    <p> 
+      Settings
+      <i class="right fas fa-angle-left text-red"></i>
+    </p>
+  </a>
+
+  <ul class="nav nav-treeview">
+   @can('subject-list')
+    <li class="nav-item">
+      <a href="{{ route('subjects.index') }}" class="nav-link   {{request()->routeIs('subjects*')?'active':'' }} ">
+        <i class="far fa-circle nav-icon text-red"></i>
+        <p>Subjects</p>
+      </a>
+    </li>  
+@endcan
+@can('halls-list')
+    <li class="nav-item">
+      <a href="{{ route('hall.index') }}" class="nav-link   {{request()->routeIs('hall*')?'active':'' }} ">
+        <i class="far fa-circle nav-icon text-red"></i>
+        <p>Halls</p>
+      </a>
+    </li>  
+    @endcan
+    @can('role-list')
+    <li class="nav-item">
+      <a href="{{ route('roles.index') }}" class="nav-link   {{request()->routeIs('roles*')?'active':'' }} ">
+        <i class="far fa-circle nav-icon text-red"></i>
+        <p>Roles</p>
+      </a>
+    </li> 
+    @endcan 
+    @can('user-list')
+    <li class="nav-item">
+      <a href="{{ route('users.index') }}" class="nav-link   {{request()->routeIs('users*')?'active':'' }} ">
+        <i class="far fa-circle nav-icon text-red"></i>
+        <p>Users</p>
+      </a>
+    </li>  
+    @endcan
+  </ul>
+</li>
+
+
+<li class="nav-item">
+  <a href="{{ route('profile') }}" class="nav-link {{  request()->routeIs('profile') ? 'active' : '' }}">
+      <i class="nav-icon fas fa-user"></i>
+      <p>Profile</p>
+  </a>
+</li>

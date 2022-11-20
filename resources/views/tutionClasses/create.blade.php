@@ -44,9 +44,14 @@
 
               <div class="form-group row">
                 <label for="subject" class="col-sm-2">location </label>
-                <div class="col-sm-7">
-                <input type="text" name="location" class="  form-control @error('location') is-invalid @enderror" value="{{ old('location') }}">
-                @error('location')
+                <div class="col-sm-7"> 
+                <select name="hall_id" id="hall_id"  class="  form-control @error('hall_id') is-invalid @enderror">
+                  <option value=""></option>
+                  @foreach ($hall as $item)
+                      <option value="{{ $item->id }}" @if($item->id==old('hall_id')) selected @endif>{{ $item->name }}</option>
+                  @endforeach
+                </select>
+                @error('hall_id')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
                 </span>
@@ -89,22 +94,7 @@
                 </div>
               </div>
 
-              <div class="form-group row">
-                <label for="institutes_id" class="col-sm-2"> institute</label>
-                <div class="col-sm-7">
-                <select name="institutes_id" id="institutes_id" class="select2 form-control  @error('institutes_id') is-invalid @enderror">
-                    <option value=""></option>
-                    @foreach ($institute as $item)
-                        <option value="{{ $item->id }}" @if($item->id==old('institutes_id')) selected @endif  >{{ $item->name }}</option>
-                    @endforeach
-                </select>
-                @error('institutes_id')
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-              </div>
-              </div>
+ 
 
  
  

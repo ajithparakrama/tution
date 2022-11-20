@@ -10,6 +10,15 @@ use App\Http\Requests\subjectCareateRequest;
 
 class subjectsController extends Controller
 {
+
+    function __construct()
+    {
+         $this->middleware('permission:subject-list|subject-create|subject-edit|subject-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:subject-create', ['only' => ['create','store']]);
+         $this->middleware('permission:subject-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:subject-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +26,8 @@ class subjectsController extends Controller
      */
     public function index(subjectsDatatable $datatable)
     {
-        return $datatable->render('subjects.admin.index');
-       // return view('subjects.admin.index');
+        return $datatable->render('settings.subjects.index');
+       // return view('settings.subjects.index');
     }
 
     /**
@@ -28,7 +37,7 @@ class subjectsController extends Controller
      */
     public function create()
     {
-        return view('subjects.admin.create');
+        return view('settings.subjects.create');
     }
 
     /**
@@ -40,7 +49,7 @@ class subjectsController extends Controller
     public function store(subjectCareateRequest $request)
     {
         subject::create($request->toArray());
-        return redirect()->route('admin.subjects.index')->with('message','Succesfull');
+        return redirect()->route('subjects.index')->with('message','Succesfull');
     }
 
     /**
@@ -62,7 +71,7 @@ class subjectsController extends Controller
      */
     public function edit(subject $subject)
     {
-        return view('subjects.admin.edit',compact('subject'));
+        return view('settings.subjects.edit',compact('subject'));
     }
 
     /**
@@ -75,7 +84,7 @@ class subjectsController extends Controller
     public function update(subjectUpdateRequest $request, subject $subject)
     {
         $subject->update($request->all());
-        return redirect()->route('admin.subjects.index')->with('message','Success');
+        return redirect()->route('subjects.index')->with('message','Success');
     }
 
     /**
@@ -87,6 +96,6 @@ class subjectsController extends Controller
     public function destroy(subject $subject)
     {
         $subject->update(['active'=>0]);
-        return redirect()->route('admin.subjects.index')->with('message','Success');
+        return redirect()->route('subjects.index')->with('message','Success');
     }
 }

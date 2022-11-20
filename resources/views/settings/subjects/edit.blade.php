@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="container-fluid">
@@ -24,7 +24,7 @@
         <div class="card-header">
             <h2 class="card-title">Edit {{ $subject->name }}</h2>
         </div>
-        <form action="{{ route('admin.subjects.update',$subject->id) }}" method="post">
+        <form action="{{ route('subjects.update',$subject->id) }}" method="post">
 
         <div class="card-body">
            

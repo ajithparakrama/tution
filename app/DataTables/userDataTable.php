@@ -2,15 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\subject;
+use App\Models\User;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class subjectsDatatable extends DataTable
+class userDatatable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,41 +17,48 @@ class subjectsDatatable extends DataTable
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
-
-   
     public function dataTable($query)
     {
-       
-
         return datatables()
             ->eloquent($query)
             ->addIndexColumn()
+            ->addColumn('roles',function($item){
+                $res = '';
+                foreach($item->getRoleNames() as $v){ 
+                        $res .= '<label class="badge badge-success">'.$v.' </label>';
+                        };
+                        return $res;
+            })
             ->addColumn('action', function($item){
                 $btn = '';
                 $user = Auth()->user(); 
-                if($user->can('subject-edit')){
-                $btn .= ' <a href="'.route('subjects.edit',$item->id).'" class="btn btn-xs btn-info"><i class="fa fa-pencil-alt"></i></a>';
+                if($user->can('user-edit')){                    
+                $btn .=  '<a href="'.route('users.edit',$item->id).'" class="btn btn-xs btn-info"><i class="fa fa-pen"></i></a>';
                 }
-                if($user->can('subject-delete')){
-                $btn .= '<form  action="'. route('subjects.destroy',$item->id).'" method="POST" class="d-inline" >
+                if($user->can('user-list')){       
+                $btn .=  '<a href="'.route('users.show',$item->id).'" class="btn btn-xs btn-warning"><i class="fa fa-eye"></i></a>';
+                }
+                if($user->can('user-delete')){       
+                $btn .= '<form  action="'. route('users.destroy',$item->id).'" method="POST" class="d-inline" >
                 '.csrf_field().' '.method_field("DELETE").' <button type="submit"  class="btn btn-xs btn-danger" 
-                onclick="return confirm(\'Do you need to delete this Category\');"> 
+                onclick="return confirm(\'Do you need to delete this Location\');"> 
                 <i class="fa fa-trash-alt"></i></button>  
                 </form>';
                 }
-                return$btn;
-            });
+                return $btn; 
+            })
+            ->rawColumns(['roles','action']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\subjectsDatatable $model
+     * @param \User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(subject $model)
+    public function query(User $model)
     {
-        return $model->newQuery()->where('active','=',1);
+        return $model->newQuery()->with('Roles');
     }
 
     /**
@@ -63,7 +69,7 @@ class subjectsDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('subjectsdatatable-table')
+                    ->setTableId('userdatatable-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -85,13 +91,15 @@ class subjectsDatatable extends DataTable
     protected function getColumns()
     {
         return [
-
-            Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false),
+            Column::make('DT_RowIndex')->title('#')->searchable(false)->orderable(false),
             Column::make('name'), 
+            Column::make('user_name'), 
+            Column::make('email'), 
+            Column::make('roles'), 
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
-            ->width(120)
+            ->width(160)
             ->addClass('text-center'),
         ];
     }
@@ -103,6 +111,6 @@ class subjectsDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'subjects_' . date('YmdHis');
+        return 'user_' . date('YmdHis');
     }
 }

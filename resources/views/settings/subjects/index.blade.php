@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="container-fluid">
@@ -6,13 +6,13 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-             
+             <h3 class="card-title">Subjects</h3>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Subjects</a></li>
-                <li class="breadcrumb-item active">Create New</li>
+                <li class="breadcrumb-item active">All</li>
               </ol>
             </div>
           </div>
@@ -22,7 +22,7 @@
     
     <div class="card">
         <div class="card-header">
-            <h2 class="card-title">Create Subject</h2>
+            <h2 class="card-title">  All</h2>
         </div>
         
         <div class="card-body">

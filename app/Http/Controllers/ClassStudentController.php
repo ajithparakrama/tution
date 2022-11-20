@@ -8,6 +8,22 @@ use App\DataTables\classStudentsDatatable;
 
 class ClassStudentController extends Controller
 {
+
+    
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    function __construct()
+    {
+        //  $this->middleware('permission:classes-list|classes-create|classes-edit|classes-delete', ['only' => ['index','store']]);
+        //  $this->middleware('permission:classes-create', ['only' => ['create','store']]);
+        //  $this->middleware('permission:classes-edit', ['only' => ['edit','update']]);
+        //  $this->middleware('permission:classes-delete', ['only' => ['destroy']]);
+    } 
+
     /**
      * Display a listing of the resource.
      *
@@ -69,10 +85,10 @@ class ClassStudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    // public function update(Request $request, $id)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -80,10 +96,10 @@ class ClassStudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+    // public function destroy($id)
+    // {
+    //     //
+    // }
 
     public function addToClass(TutionClass $tution){
         return view('tutionClasses.students.add-to-class',compact('tution'));

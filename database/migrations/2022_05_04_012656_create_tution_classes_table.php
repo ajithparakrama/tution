@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name', 100);
             $table->tinyInteger('type');     
-            $table->string('location', 100)->nullable();
-            $table->bigInteger('institutes_id')->nullable();
+   //        $table->string('location', 100)->nullable();
+            $table->bigInteger('hall_id')->nullable();
             $table->bigInteger('teacher_id');
             $table->bigInteger('subjects_id');
       #      $table->foreign('subjects_id')->references('id')->on('subjects')->onDelete('cascade');

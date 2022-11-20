@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\institute;
+use App\Models\hall;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class instituteDatatable extends DataTable
+class hallDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -23,12 +23,16 @@ class instituteDatatable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->addColumn('action', function($item){
-                $btn = ' <a href="'.route('admin.institute.edit',$item->id).'" class="btn btn-xs btn-info"><i class="fa fa-pencil-alt"></i></a>';
-                $btn .= '<form  action="'. route('admin.institute.destroy',$item->id).'" method="POST" class="d-inline" >
-                '.csrf_field().' '.method_field("DELETE").' <button type="submit"  class="btn btn-xs btn-danger" 
-                onclick="return confirm(\'Do you need to delete this Category\');"> 
-                <i class="fa fa-trash-alt"></i></button>  
-                </form>';
+                $btn = '';
+                $user = Auth()->user(); 
+                if($user->can('halls-edit')){
+                $btn = ' <a href="'.route('hall.edit',$item->id).'" class="btn btn-xs btn-info"><i class="fa fa-pencil-alt"></i></a>';
+                }
+                // $btn .= '<form  action="'. route('hall.destroy',$item->id).'" method="POST" class="d-inline" >
+                // '.csrf_field().' '.method_field("DELETE").' <button type="submit"  class="btn btn-xs btn-danger" 
+                // onclick="return confirm(\'Do you need to delete this Category\');"> 
+                // <i class="fa fa-trash-alt"></i></button>  
+                // </form>';
 
                 return$btn;
             });
@@ -37,12 +41,12 @@ class instituteDatatable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\instituteDatatable $model
+     * @param \App\Models\hall $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(institute $model)
+    public function query(hall $model)
     {
-        return $model->newQuery()->where('active','=','1');
+        return $model->newQuery();
     }
 
     /**
@@ -53,7 +57,7 @@ class instituteDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('institutedatatable-table')
+                    ->setTableId('hall-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -74,12 +78,11 @@ class instituteDatatable extends DataTable
      */
     protected function getColumns()
     {
-        return [ 
+        return [
+
             Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(true),
             Column::make('name'),
-            Column::make('address'),
-            Column::make('phone'),
-            Column::make('phone1'), 
+            Column::make('capacity'), 
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
@@ -95,6 +98,6 @@ class instituteDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'institute_' . date('YmdHis');
+        return 'hall_' . date('YmdHis');
     }
 }

@@ -29,15 +29,15 @@
                 @csrf
 
                 <div class="input-group mb-3">
-                    <input type="email"
-                           name="email"
-                           value="{{ old('email') }}"
-                           placeholder="Email"
-                           class="form-control @error('email') is-invalid @enderror">
+                    <input type="text"
+                           name="user_name"
+                           value="{{ old('user_name') }}"
+                           placeholder="User name"
+                           class="form-control @error('user_name') is-invalid @enderror">
                     <div class="input-group-append">
                         <div class="input-group-text"><span class="fas fa-envelope"></span></div>
                     </div>
-                    @error('email')
+                    @error('user_name')
                     <span class="error invalid-feedback">{{ $message }}</span>
                     @enderror
                 </div>

@@ -28,6 +28,7 @@ class tutionDatatable extends DataTable
                 $btn .=  '<a href="'.route('tstudents.index',$item->id).'" class="btn btn-xs btn-success" title="Students" data-toggle="tooltip"><i class="fa fa-users"></i></a> ';
                 $btn .=  '<a href="'.route('ctimes.index',$item->id).'" class="btn btn-xs btn-warning" title="Class dates" data-toggle="tooltip"><i class="fa fa-calendar-alt"></i></a> ';
                 $btn .=  '<a href="'.route('payemnt-months.index',$item->id).'" class="btn btn-xs bg-olive" title="Class dates" data-toggle="tooltip"><i class="fa fa-dollar-sign"></i></a> ';
+                $btn .=  '<a href="'.route('tution.staff',$item->id).'" class="btn btn-xs bg-olive" title="Class dates" data-toggle="tooltip"><i class="fa fa-user-tie"></i></a> ';
               
                 if($item->active==1){ 
                 $btn .=  '<a href="'.route('tution.deactive',$item->id).'" class="btn btn-xs btn-danger" title="Inactive" data-toggle="tooltip"><i class="fa fa-trash"></i></a>';
@@ -47,7 +48,7 @@ class tutionDatatable extends DataTable
     public function query(TutionClass $model)
     {
       //  return $model->newQuery()->with('subject')->with('institute');
-      return Auth::user()->tution()->with('subject')->with('institute');
+      return Auth::user()->tution()->with('subject');
     }
 
     /**
@@ -88,7 +89,7 @@ class tutionDatatable extends DataTable
             ->addClass('text-center'), 
             Column::make('name'),
             Column::make('subject.name')->title('Subject'),
-            Column::make('institute.name')->title('Institute'), 
+       #     Column::make('institute.name')->title('Institute'), 
         ];
     }
 

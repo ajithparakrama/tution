@@ -25,11 +25,11 @@ class subjectUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|min:2|max:255|unique:subjects,name',
+            'name'=>'required|min:2|max:255|unique:subjects,name,'.$this->subject->id,
             'name'=>['required',
             'min:2',
-            'max:255',
-            Rule::unique('subjects','name')->ignore($this->subject->id)]
+            'max:255']
+        //    Rule::unique('subjects','name')->ignore($this->subject->id)]
         ];
     }
 }

@@ -44,6 +44,22 @@
 
                 <div class="input-group mb-3">
                     <input type="text"
+                           name="name"
+                           class="form-control @error('name') is-invalid @enderror"
+                           value="{{ old('name') }}"
+                           placeholder="First Name">
+                    <div class="input-group-append">
+                        <div class="input-group-text"><span class="fas fa-text-width"></span></div>
+                    </div>
+                    @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="text"
                            name="phone"
                            class="form-control @error('phone') is-invalid @enderror"
                            value="{{ old('phone') }}"

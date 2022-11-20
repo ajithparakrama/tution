@@ -11,9 +11,8 @@ class TutionClass extends Model
 
     protected $fillable = [
         'name',
-'type',
-'location',
-'institutes_id',
+'type', 
+'hall_id',
 'teacher_id',
 'subjects_id',
 'active'
@@ -29,15 +28,7 @@ class TutionClass extends Model
         return $this->belongsTo(User::class, 'teacher_id');
     }
 
-    /**
-     * Get the institute that owns the tution_class
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function institute()
-    {
-        return $this->belongsTo(institute::class, 'institutes_id');
-    }
+ 
 
     /**
      * Get the user that owns the tution_class
@@ -60,7 +51,7 @@ class TutionClass extends Model
     }
 
     /**
-     * The roles that belong to the TutionClass
+     * The staff that belong to the TutionClass
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -77,5 +68,25 @@ class TutionClass extends Model
     public function paymentMonths()
     {
         return $this->hasMany(paymentMonth::class, 'tution_classes_id');
+    }
+
+    /**
+     * The staff that belong to the TutionClass
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function staff()
+    {
+        return $this->belongsToMany(User::class, 'tution_class_user', 'tution_class_id','user_id');
+    }
+
+    /**
+     * Get the hall that owns the TutionClass
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function hall()
+    {
+        return $this->belongsTo(hall::class, 'foreign_key', 'other_key');
     }
 }
