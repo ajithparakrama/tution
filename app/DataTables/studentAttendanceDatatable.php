@@ -22,6 +22,9 @@ class studentAttendanceDatatable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addIndexColumn()
+            ->addColumn('in_time',function($item){
+                return date('M-d h:i :sa',strtotime($item->create_at));
+            })
             ->addColumn('action', 'studentattendancedatatable.action');
     }
 
@@ -70,7 +73,7 @@ class studentAttendanceDatatable extends DataTable
        //     Column::make('id'),
             Column::make('name'),
         //    Column::make('amount'),
-            Column::make('created_at'),
+            Column::make('in_time'),
         ];
     }
 

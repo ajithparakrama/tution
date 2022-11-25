@@ -17,7 +17,7 @@
  
 
 @can('classes-list')
-  <li class="nav-item   has-treeview  {{request()->routeIs('tution*','tstudents*','tution*')?'menu-open':'' }}   ">
+  <li class="nav-item   has-treeview  {{request()->routeIs('tution*','tstudents*','tution*','ctimes*')?'menu-open':'' }}   ">
     <a href="#" class="nav-link"> 
       <i class="nav-icon nav-icon fas fa-file-alt text-blue"></i>            
       <p> 

@@ -18,10 +18,10 @@ class ClassStudentController extends Controller
 
     function __construct()
     {
-        //  $this->middleware('permission:classes-list|classes-create|classes-edit|classes-delete', ['only' => ['index','store']]);
-        //  $this->middleware('permission:classes-create', ['only' => ['create','store']]);
-        //  $this->middleware('permission:classes-edit', ['only' => ['edit','update']]);
-        //  $this->middleware('permission:classes-delete', ['only' => ['destroy']]);
+      //   $this->middleware('permission:classes-list|classes-create|classes-edit|classes-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:classes-students-list', ['only' => ['index']]);
+         $this->middleware('permission:classes-students-add', ['only' => ['addToClass','saveToClass']]);
+      //   $this->middleware('permission:classes-delete', ['only' => ['destroy']]);
     } 
 
     /**

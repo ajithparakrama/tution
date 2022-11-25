@@ -23,9 +23,10 @@
         <div class="card-header">
             <h2 class="card-title">{{ $tution->name }} Students List at {{ ($tution->hall->name)??'' }}</h2>
             <div class="card-tools"> 
+              
               <form action="{{ route('tstudent.save-to-class',$tution->id) }}" method="post" class="d-inline">
               <div class="input-group input-group-sm">
-              
+                @can('classes-students-add')
                 @csrf
                     @method('POST')
                 <input type="text" class="form-control text-lg @error('student_id') is-invalid @enderror" placeholder="Student ID" name="student_id" value="{{ old('student_id') }}" required> 
@@ -37,9 +38,12 @@
                 <span class="input-group-append">
                   <button type="submit" class="btn btn-success btn-flat">Add Student</button>
                 </span> 
-               
+               @endcan
                 &nbsp;&nbsp;&nbsp;
+                @can('student-create')
                 <a href="{{ route('students.create') }}" class="btn btn-sm btn-info"><i class="fa fa-plus"></i> Register New Student</a>
+                @endcan
+
                 &nbsp;&nbsp;&nbsp;
                 <a href="{{ url()->previous() }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
               </div>

@@ -24,17 +24,25 @@ class tutionDatatable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->addColumn('action', function($item){
+                $btn = '';
+                $user = Auth()->user(); 
+                if($user->can('classes-edit')){
                 $btn =  '<a href="'.route('tution.edit',$item->id).'" class="btn btn-xs btn-info" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil-alt"></i></a> ';
+                }
+                if($user->can('classes-students-list')){
                 $btn .=  '<a href="'.route('tstudents.index',$item->id).'" class="btn btn-xs btn-success" title="Students" data-toggle="tooltip"><i class="fa fa-users"></i></a> ';
+                }
                 $btn .=  '<a href="'.route('ctimes.index',$item->id).'" class="btn btn-xs btn-warning" title="Class dates" data-toggle="tooltip"><i class="fa fa-calendar-alt"></i></a> ';
                 $btn .=  '<a href="'.route('payemnt-months.index',$item->id).'" class="btn btn-xs bg-olive" title="Class dates" data-toggle="tooltip"><i class="fa fa-dollar-sign"></i></a> ';
                 $btn .=  '<a href="'.route('tution.staff',$item->id).'" class="btn btn-xs bg-olive" title="Class dates" data-toggle="tooltip"><i class="fa fa-user-tie"></i></a> ';
               
+                if($user->can('classes-delete')){
                 if($item->active==1){ 
                 $btn .=  '<a href="'.route('tution.deactive',$item->id).'" class="btn btn-xs btn-danger" title="Inactive" data-toggle="tooltip"><i class="fa fa-trash"></i></a>';
                 }else{
                     $btn .=  '<a href="'.route('tution.active',$item->id).'" class="btn btn-xs btn-success" title="Activate" data-toggle="tooltip"><i class="fa fa-undo"></i></a>';
                 }
+            }
                 return $btn;
             });
     }

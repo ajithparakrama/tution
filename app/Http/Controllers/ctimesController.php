@@ -11,6 +11,23 @@ use App\DataTables\studentAttendanceDatatable;
 
 class ctimesController extends Controller
 {
+
+            /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    function __construct()
+    {
+         $this->middleware('permission:class-time-list|class-time-create|class-time-edit|class-time-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:class-time-create', ['only' => ['create','store']]);
+         $this->middleware('permission:class-time-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:class-time-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:class-time-attendance', ['only' => ['attendance']]);
+         $this->middleware('permission:class-time-mark-attendance', ['only' => ['markattendance']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

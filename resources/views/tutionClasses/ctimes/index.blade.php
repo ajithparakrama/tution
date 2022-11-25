@@ -5,7 +5,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-             
+             <h3 class="card-title">Class Dates and times</h3>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -21,10 +21,12 @@
     
     <div class="card">
         <div class="card-header">
-            <h2 class="card-title">{{ $tution->name }} at {{ $tution->institute->name }}</h2>
+            <h2 class="card-title">{{ $tution->name }} at {{ ($tution->hall->name)??'' }}</h2>
 
             <div class="card-tools">
+              @can('class-time-create')
               <a href="{{ route('ctimes.create',[$tution->id]) }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New Date and Time</a>
+              @endcan
               <a href="{{  route('tution.index') }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
             </div>
         </div>
@@ -50,8 +52,12 @@
                 
                 <td></td>
                 <td>
+                  @can('class-time-edit')
                   <a href="{{ route('ctimes.edit',[$tution->id,$item->id]) }}" class="btn btn-xs btn-info" title="Edit Date and Time" data-toggle="tolltip"><i class="fa fa-pencil-alt"></i></a>
-                  <a href="{{ route('ctimes.attendance',[$tution->id,$item->id]) }}" class="btn btn-xs btn-success"><i class="fa fa-sign-in"></i></a>
+                  @endcan
+                  @can('class-time-attendance')
+                  <a href="{{ route('ctimes.attendance',[$tution->id,$item->id]) }}" class="btn btn-xs btn-success"><i class="fa fa-running fa-flip-horizontal"></i></a>
+                  @endcan
                 </td>
               </tr>
               @endforeach
