@@ -54,6 +54,7 @@ Route::group(['middleware' => ['verified']], function() {
     Route::resource('students',StudentController::class);
     Route::get('tution/active/{tution}',[tutionController::class,'active'])->name('tution.active');
     Route::get('tution/deactive/{tution}',[tutionController::class,'deactive'])->name('tution.deactive');
+    Route::get('tution/check-list',[tutionController::class,'checkList'])->name('tution.check-list');
     Route::resource('tution',tutionController::class);
 
 Route::prefix('settings')->group(function(){

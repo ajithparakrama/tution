@@ -5,12 +5,12 @@ namespace App\Models;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+//use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable 
 {
     use HasApiTokens, HasFactory, HasRoles;
 
@@ -55,5 +55,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function tution()
     {
         return $this->hasMany(TutionClass::class, 'teacher_id');
+    }
+
+       /**
+     * The staff that belong to the TutionClass
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function TutionClass()
+    {
+        return $this->belongsToMany(TutionClass::class, 'tution_class_user', 'user_id','tution_class_id');
     }
 }

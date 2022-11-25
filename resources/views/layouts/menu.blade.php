@@ -16,6 +16,17 @@
     @endcan
  
 
+ @can('classes-check-list')
+ <li class="nav-item">
+  <a href="{{ route('tution.check-list') }}" class="nav-link   {{request()->routeIs('tution.check-list')?'active':'' }} ">
+    <i class="nav-icon nav-icon fa fa-chalkboard-teacher text-green"></i>  
+ 
+    <p>Classes</p>
+  </a>
+</li>  
+
+ @endcan
+
 @can('classes-list')
   <li class="nav-item   has-treeview  {{request()->routeIs('tution*','tstudents*','tution*','ctimes*')?'menu-open':'' }}   ">
     <a href="#" class="nav-link"> 
@@ -44,6 +55,7 @@
 </li>
 @endcan
 
+@if(Auth::user()->hasAnyPermission(['subject-list', 'halls-list','role-list','user-list']))
 <li class="nav-item   has-treeview  {{request()->routeIs('subjects*','hall*','roles*','users*')?'menu-open':'' }}   ">
   <a href="#" class="nav-link"> 
     <i class="nav-icon nav-icon fas fa-cog text-red"></i>            
@@ -88,11 +100,13 @@
     @endcan
   </ul>
 </li>
+@endif
 
-
+@can('profile')
 <li class="nav-item">
   <a href="{{ route('profile') }}" class="nav-link {{  request()->routeIs('profile') ? 'active' : '' }}">
       <i class="nav-icon fas fa-user"></i>
       <p>Profile</p>
   </a>
 </li>
+@endcan

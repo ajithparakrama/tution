@@ -10,6 +10,20 @@ use App\DataTables\tutionMonthPaymentsDatatable;
 
 class paymentMonthController extends Controller
 {
+
+                /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    function __construct()
+    {
+         $this->middleware('permission:class-payments', ['only' => ['index']]);
+         $this->middleware('permission:class-view-payments', ['only' => ['addpayment']]); 
+         $this->middleware('permission:class-add-payments', ['only' => ['store']]); 
+    }
+
     /**
      * Display a listing of the resource.
      *

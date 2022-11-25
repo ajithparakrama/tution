@@ -27,7 +27,12 @@
               @can('class-time-create')
               <a href="{{ route('ctimes.create',[$tution->id]) }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New Date and Time</a>
               @endcan
+              @role('Card Checker')
+              <a href="{{  route('tution.check-list') }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
+              @else 
               <a href="{{  route('tution.index') }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
+              @endrole
+              
             </div>
         </div>
         

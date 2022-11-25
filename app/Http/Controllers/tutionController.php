@@ -10,6 +10,7 @@ use App\Models\TutionClass;
 use Illuminate\Http\Request;
 use App\DataTables\tutionDatatable;
 use Illuminate\Support\Facades\Auth;
+use App\DataTables\checkListDataTable;
 
 class tutionController extends Controller
 {
@@ -26,6 +27,9 @@ class tutionController extends Controller
          $this->middleware('permission:classes-create', ['only' => ['create','store']]);
          $this->middleware('permission:classes-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:classes-delete', ['only' => ['active','deactive']]);
+         $this->middleware('permission:classes-staff', ['only' => ['staff','storeStaff']]);
+         $this->middleware('permission:classes-check-list', ['only' => ['checkList','storeStaff']]);
+         
     } 
 
 
@@ -157,7 +161,12 @@ class tutionController extends Controller
     }
 
     public function staff(TutionClass $tution){
-        $users = User::where('type','=',2)->get();
+     //   $users = User::where('type','=',2)->get();
+        $users = User::whereHas(
+            'roles', function($q){
+                $q->where('name', 'Card Checker');
+            }
+        )->get();
         return view('tutionClasses.staff.index',compact('tution','users'));
     }
 
@@ -166,6 +175,16 @@ class tutionController extends Controller
 
         $tution->staff()->sync($request->user_id);
         return redirect()->route('tution.index')->with('message','Staff added to class');
+    }
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function checkList(checkListDataTable $dataTable)
+    {
+        return $dataTable->render('tutionClasses.index');
     }
 
 

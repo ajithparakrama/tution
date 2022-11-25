@@ -22,7 +22,7 @@
     
     <div class="card">
         <div class="card-header">
-            <h2 class="card-title">{{ $tution->name }} Students List at {{ $tution->institute->name }}</h2>
+            <h2 class="card-title">{{ $tution->name }} Students List at {{ ($tution->hall->name)??'' }}</h2>
             <div class="card-tools">
               <a href="{{ url()->previous() }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
             </div>

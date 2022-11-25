@@ -32,10 +32,15 @@ class tutionDatatable extends DataTable
                 if($user->can('classes-students-list')){
                 $btn .=  '<a href="'.route('tstudents.index',$item->id).'" class="btn btn-xs btn-success" title="Students" data-toggle="tooltip"><i class="fa fa-users"></i></a> ';
                 }
+                if($user->can('class-time-list')){ 
                 $btn .=  '<a href="'.route('ctimes.index',$item->id).'" class="btn btn-xs btn-warning" title="Class dates" data-toggle="tooltip"><i class="fa fa-calendar-alt"></i></a> ';
+                }
+                if($user->can('class-payments')){ 
                 $btn .=  '<a href="'.route('payemnt-months.index',$item->id).'" class="btn btn-xs bg-olive" title="Class dates" data-toggle="tooltip"><i class="fa fa-dollar-sign"></i></a> ';
+                }
+                if($user->can('classes-staff')){
                 $btn .=  '<a href="'.route('tution.staff',$item->id).'" class="btn btn-xs bg-olive" title="Class dates" data-toggle="tooltip"><i class="fa fa-user-tie"></i></a> ';
-              
+                }
                 if($user->can('classes-delete')){
                 if($item->active==1){ 
                 $btn .=  '<a href="'.route('tution.deactive',$item->id).'" class="btn btn-xs btn-danger" title="Inactive" data-toggle="tooltip"><i class="fa fa-trash"></i></a>';

@@ -21,11 +21,14 @@
     
     <div class="card">
         <div class="card-header">
-            <h2 class="card-title">{{ $tution->name }} at {{ $tution->institute->name }}</h2>
+            <h2 class="card-title">{{ $tution->name }} at {{ ($tution->hall->name)??'' }}</h2>
 
             <div class="card-tools">
-             
+              @role('Cachier')
+              <a href="{{  route('tution.check-list') }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
+              @else 
               <a href="{{  route('tution.index') }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
+              @endrole 
             </div>
         </div>
         
