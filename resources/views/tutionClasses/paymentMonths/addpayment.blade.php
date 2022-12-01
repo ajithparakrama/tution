@@ -21,7 +21,10 @@
 
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title">{{ $tution->name }} Payment for {{ $payment_month->name }}</h2>
+                <h2 class="card-title">{{ $tution->name }} Payment for {{ $payment_month->name }} </h2>
+                <badge class="badge bg-success">
+                  {{ $payment_month->student->count() }} /  {{ $tution->student->count() }} 
+                </badge>
                 <div class="card-tools">
                     <a href="{{ route('payemnt-months.index',$tution->id) }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i>
                         Back</a>
@@ -35,7 +38,7 @@
                         @csrf
                         @method('POST')
                         <div class="form-group row">
-                            <label for="Search" class="col-md-3">Student ID</label>
+                            <label for="Search" class="col-md-3">Student ID</label> 
                             <div class="col-md-4">
                                 <select name="students_id" id=""
                                     class="select2 form-control  @error('students_id') is-invalid @enderror" required>

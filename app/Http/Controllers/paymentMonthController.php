@@ -57,6 +57,12 @@ class paymentMonthController extends Controller
     //  */
     public function store(Request $request,TutionClass $tution, paymentMonth $payment_month)
     { 
+
+     
+     if($payment_month->student()->where('id',$request->students_id)->exists()){
+          return redirect()->route('payemnt-months.add-payment',[$tution->id,$payment_month->id])->with('danger','Student alrady  Paid');
+      }
+
          $res = $payment_month->student()->attach(
             $request->students_id
             ,[

@@ -150,6 +150,11 @@ class ctimesController extends Controller
             'student_id'=>'required'
         ]);
 
+
+        if($ctime->students()->where('id',$request->student_id)->exists()){
+            return redirect()->route('ctimes.attendance',[$tution->id,$ctime->id])->with('danger','Student alrady in the class');
+        }
+
      $res=    $ctime->students()->attach($request->student_id,[
             'created_by'=>Auth::user()->id,
             'active'=>1,
