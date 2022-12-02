@@ -23,6 +23,7 @@
     <div class="card">
         <div class="card-header">
             <h2 class="card-title">Edit {{ $subject->name }}</h2>
+            <div class="card-tools">  <a href="{{ url()->previous() }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a></div>
         </div>
         <form action="{{ route('subjects.update',$subject->id) }}" method="post">
 

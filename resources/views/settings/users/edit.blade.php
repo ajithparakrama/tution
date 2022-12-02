@@ -21,7 +21,10 @@
         <section class="content">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">User details</h3>
+                    <h3 class="card-title">{{ $user->name }}</h3>
+                    <div class="card-tools">
+                        <a href="{{ url()->previous() }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
+                      </div>
                 </div>
 
                 {!! Form::open(['route' => ['users.update', $user->id], 'method' => 'PATCH']) !!}

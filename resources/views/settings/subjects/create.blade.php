@@ -23,6 +23,9 @@
     <div class="card">
         <div class="card-header">
             <h2 class="card-title">Create Subject</h2>
+            <div class="card-tools">
+              <a href="{{ url()->previous() }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
+            </div>
         </div>
         <form action="{{ route('subjects.store') }}" method="post">
         <div class="card-body">

@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\hall;
+use App\Models\User;
+use App\Models\student;
+use App\Models\subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,7 +28,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $subjcets =  subject::all()->count();
+        $user =  User::all()->count();
+        $hall =  hall::all()->count();
+        $students = student::all()->count();
+
+        $tutions = Auth::user()->tution;
+        return view('home',compact('subjcets','user','hall','students','tutions'));
     }
 
     public function adminindex(){

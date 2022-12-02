@@ -24,6 +24,9 @@
             <div class="card-title"> 
                 Change Password
             </div>
+            <div class="card-tools">
+                <a href="{{ url()->previous() }}" class="btn bg-gray-dark btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
+            </div>
         </div> 
         
             <form method="post" action="{{ route('change.password') }}" enctype="multipart/form-data">

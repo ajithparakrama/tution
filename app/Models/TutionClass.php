@@ -87,6 +87,6 @@ class TutionClass extends Model
      */
     public function hall()
     {
-        return $this->belongsTo(hall::class, 'foreign_key', 'other_key');
+        return $this->belongsTo(hall::class, 'hall_id');
     }
 }
