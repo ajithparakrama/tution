@@ -149,7 +149,9 @@ class ctimesController extends Controller
         $request->validate([
             'student_id'=>'required'
         ]);
-
+ 
+        if($tution->student()->where('student_id',$request->student_id)->exists()){
+    
 
         if($ctime->students()->where('id',$request->student_id)->exists()){
             return redirect()->route('ctimes.attendance',[$tution->id,$ctime->id])->with('danger','Student alrady in the class');
@@ -164,5 +166,9 @@ class ctimesController extends Controller
         $student = student::find($request->student_id);
 
         return redirect()->route('ctimes.attendance',[$tution->id,$ctime->id])->with('message','Attendance added.'.$student->name);
+    }else{
+         
+        return redirect()->route('ctimes.attendance',[$tution->id,$ctime->id])->with('danger','Student not register in the  class');
+    }
     }
 }

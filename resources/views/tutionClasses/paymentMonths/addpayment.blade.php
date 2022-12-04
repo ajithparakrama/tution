@@ -33,6 +33,7 @@
                 </div>
             </div>
             @can('class-add-payments')
+            @if( $payment_month->name == date('Y-M'))  
                 <form action="{{ route('payemnt-months.store', [$tution->id, $payment_month->id]) }}" method="post">
                     <div class="card-body">
                         @csrf
@@ -42,8 +43,8 @@
                             <div class="col-md-4">
                                 <select name="students_id" id=""
                                     class="select2 form-control  @error('students_id') is-invalid @enderror" required>
-                                    @foreach ($tution->student as $item)
-                                        <option value="{{ $item->id }}">{{ $item->id }}</option>
+                                    @foreach ($tution->student->whereNotIn('id', $payment_month->student->pluck('id') ) as $item)
+                                        <option value="{{ $item->id }}">{{ $item->id }} | {{ $item->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('students_id')
@@ -72,6 +73,7 @@
                         <input type="submit" value="Add Payment" class="btn btn-sm btn-success">
                     </div>
                 </form>
+                @endif
             @endcan
         </div>
     </div>

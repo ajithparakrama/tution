@@ -28,7 +28,7 @@ class tutionController extends Controller
          $this->middleware('permission:classes-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:classes-delete', ['only' => ['active','deactive']]);
          $this->middleware('permission:classes-staff', ['only' => ['staff','storeStaff']]);
-         $this->middleware('permission:classes-check-list', ['only' => ['checkList','storeStaff']]);
+         $this->middleware('permission:classes-check-list', ['only' => ['checkList']]);
          
     } 
 

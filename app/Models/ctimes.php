@@ -25,7 +25,7 @@ class ctimes extends Model
      */
     public function students()
     {
-        return $this->belongsToMany(student::class, 'ctime_student', 'ctime_id', 'student_id')->withPivot('craete_by','ip','update_by','up_ip')->withTimestamps();
+        return $this->belongsToMany(student::class, 'ctime_student', 'ctime_id', 'student_id')->withPivot('created_by','ip','update_by','up_ip')->withTimestamps();
     }
 
 }

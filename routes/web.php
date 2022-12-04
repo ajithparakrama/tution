@@ -9,9 +9,10 @@ use App\Http\Controllers\userController;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ctimesController;
+use App\Http\Controllers\reportController;
 use App\Http\Controllers\tutionController;
-use App\Http\Controllers\StudentController;
 // use App\Http\Controllers\User\usercontroller;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\subjectsController;
 use App\Http\Controllers\institutesController;
 use App\Http\Controllers\ClassStudentController;
@@ -86,6 +87,7 @@ Route::prefix('settings')->group(function(){
    //     Route::resource('payemnt-months',paymentMonthController::class);
 
 
+        Route::get('report',[reportController::class,'index'])->name('report.index');
 
 
     });

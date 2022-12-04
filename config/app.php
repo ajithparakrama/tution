@@ -54,10 +54,10 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost/my/tution/beta/'),
+    'url' => env('APP_URL', 'https://localhost/my/tution/beta/'),
 
-    'asset_url' => env('ASSET_URL','http://localhost/my/tution/beta/public'),
-    'mix_url' => env('MIX_ASSET_URL', 'http://localhost/my/tution/beta/public'),
+    'asset_url' => env('ASSET_URL','https://localhost/my/tution/beta/public'),
+    'mix_url' => env('MIX_ASSET_URL', 'https://localhost/my/tution/beta/public'),
 
     /*
     |--------------------------------------------------------------------------
@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE','UTC'),
 
     /*
     |--------------------------------------------------------------------------

@@ -16,9 +16,9 @@
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
-        </section>
-
-
+        </section> 
+        @can('class-time-mark-attendance')
+        @if( ($ctime->date == date('Y-m-d')) && ($ctime->end_at > date('h:i')) )
         <div class="card">
             <div class="card-header">
                 <h2 class="card-title">Mark Attendance</h2>
@@ -27,7 +27,7 @@
                         Back</a>
                 </div>
             </div>
-            @can('class-time-mark-attendance')
+ 
                 <form action="{{ route('ctimes.markattendance', [$tution->id, $ctime->id]) }}" method="post">
                     <div class="card-body">
                         @csrf
@@ -52,17 +52,26 @@
                         </div>
                     </div>
                 </form>
-                @endcan
+
+
             </div>
         </div>
+        @else
+        <div class="card-body">
+            <div class="callout callout-info">
+                <h5> Class is over Now! <a href="{{ route('ctimes.index',$tution->id)}}" class="btn bg-gray-dark btn-sm d-inline-block float-right"><i class="fa fa-arrow-left"></i>
+                    Back</a></h5>  
+                
+              </div> 
+        </div>
+        @endif
+
+        @endcan
 
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title">Paid Students</h2>
+                <h2 class="card-title">Attend Students    {{ $ctime->students->count() }} /  {{ $tution->student->count() }} </h2>
 
-                <div class="card-tools">
-
-                </div>
             </div>
 
             <div class="card-body">

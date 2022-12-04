@@ -22,5 +22,9 @@
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0"
+    },
+    "dependencies": {
+        "@amcharts/amcharts5": "^5.2.38",
+        "chart.js": "^2.9.4"
     }
 }

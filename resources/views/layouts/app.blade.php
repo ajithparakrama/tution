@@ -33,9 +33,9 @@
                          class="user-image img-circle elevation-2" alt="User Image">
                     <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right ">
                     <!-- User image -->
-                    <li class="user-header bg-primary">
+                    <li class="user-header bg-dark">
                         <img src="{{ asset('images/logo.png') }}"
                              class="img-circle elevation-2"
                              alt="User Image">
@@ -71,11 +71,11 @@
     </div>
 
     <!-- Main Footer -->
-    <footer class="main-footer">
+    <footer class="main-footer text-sm">
         <div class="float-right d-none d-sm-block">
-            <b>Version</b> 3.0.5
+            <b>Version</b> 0.0.1
         </div>
-        <strong>Copyright &copy; 2014-2022 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
+        <strong>Copyright &copy; 2014-{{ date('Y') }}  .</strong> All rights
         reserved.
     </footer>
 </div>
