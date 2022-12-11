@@ -87,9 +87,9 @@ class ctimesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(TutionClass $tution,ctimes $ctime)
     {
-        //
+        return view('tutionClasses.ctimes.show',compact('tution','ctime'));
     }
 
     /**

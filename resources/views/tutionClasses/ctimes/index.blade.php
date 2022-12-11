@@ -57,6 +57,9 @@
                 
                 <td></td>
                 <td>
+         
+                  <a href="{{ route('ctimes.show',[$tution->id,$item->id]) }}" class="btn btn-xs btn-warning" title="Reports" data-toggle="tolltip"><i class="fa fa-file-pdf"></i></a>
+ 
                   @can('class-time-edit')
                   <a href="{{ route('ctimes.edit',[$tution->id,$item->id]) }}" class="btn btn-xs btn-info" title="Edit Date and Time" data-toggle="tolltip"><i class="fa fa-pencil-alt"></i></a>
                   @endcan
